@@ -1,0 +1,11 @@
+{{ define "New" }}
+  {{ template "Header" }}
+    {{ template "Menu" }}
+   <h2>New Document</h2>
+    <form method="POST" enctype="multipart/form-data" action="insert">
+      <label> Document Id </label><input type="text" name="id" /><br />
+      <label> Pdf </label><input type="file" name="file" /><br />
+      <input type="submit" value="Upload" />
+    </form>
+  {{ template "Footer" }}
+{{ end }}

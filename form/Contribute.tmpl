@@ -1,0 +1,17 @@
+{{ define "Contribute" }}
+  {{ template "Header" }}
+    {{ template "Menu"  }}
+    <h2> Contribute </h2>
+    <table border="1">
+       <tbody>
+    {{ range . }}
+      <tr>
+        <td>{{ .Prefixes }}</td>
+        <td>{{ .Address }}</td>
+        <td></td>
+      </tr>
+    {{ end }}
+       </tbody>
+    </table>
+  {{ template "Footer" }}
+{{ end }}

@@ -1,0 +1,72 @@
+version: '3'
+services:
+
+  metadata:
+    # (optional) fetches metadata for documents
+    image: zotero/translation-server
+    restart: always
+    ports:
+      - 1969:1969
+
+  replicator0:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/.persist/replicator0:/data/ipfs
+    restart: always
+    ports:
+      - 4002:4002
+      - 5002:5002
+    env_file:
+      # contains ORBIT_DB_ADDRESS
+      - .env
+    environment:
+      SWARM_PORT: 4002
+      API_PORT: 5002
+
+  # Additional replicator
+  # replicator1:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ${PWD}/.persist/replicator1:/data/ipfs
+  #   restart: always
+  #   ports:
+  #     - 4003:4003
+  #     - 5003:5003
+  #   env_file:
+  #     # contains ORBIT_DB_ADDRESS
+  #     - .env
+  #   environment:
+  #     SWARM_PORT: 4003
+  #     API_PORT: 5003
+
+  worker:
+    # (optional) will add documents to database on the fly by quering an external SEARCH_HOST
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 4003:4003
+      - 5003:5003
+    env_file:
+      # contains ORBIT_DB_ADDRESS
+      - .env
+    environment:
+      SEARCH_HOST: def-not-a-hub-of-science
+
+  redis:
+    image: bitnami/redis:6.2.4
+    # network_mode: host
+    ports:
+      - 6379:6379
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    #   SERVICE_NAME: 'redis'
+    # networks:
+    #   helios:
+    #     aliases:
+    #       - 'redis'

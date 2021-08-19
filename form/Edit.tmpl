@@ -1,0 +1,18 @@
+{{ define "Edit" }}
+  {{ template "Header" }}
+    {{ template "Menu" }}
+   <h2>Edit Document ipfsRef</h2>
+    <form method="POST" action="update">
+      <label> Id </label><input type="text" name="display" value="{{ .Id }}" readonly disabled/><br />
+      <label> IpfsRef </label><input type="text" name="ipfsRef" value="{{ .IpfsRef }}"  /><br />
+      <label> Content </label><input type="text" name="content" value="{{ .Content }}"  /><br />
+      <input type="hidden" name="id" value="{{ .Id }}" />
+      <input type="submit" value="Save" />
+    </form><br />
+    <br />
+    <form method="POST" action="delete">
+      <input type="hidden" name="id" value="{{ .Id }}" />
+      <input type="submit" value="Delete" />
+    </form><br />
+  {{ template "Footer" }}
+{{ end }}

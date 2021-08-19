@@ -1,0 +1,18 @@
+{{ define "View" }}
+  {{ template "Header" }}
+    {{ template "Menu"  }}
+    <h2> {{ .Content }} </h2>
+    <h3> {{ .Id }} </h3>
+      <p>Ipfs Reference: {{ .IpfsRef }} </p>
+      <p> Download Options: </p>
+      <p>
+        <a href="">Cloudflare</a>
+        <br />
+        <a href="">IPFS.io</a>
+        <br />
+        <a href="">Infura</a> </p>
+        <a href="/download?id={{ .Id }}">Direct Download</a> (slowest)
+      </p>
+      <a href="/edit?id={{ .Id }}">Edit</a>
+  {{ template "Footer" }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{ define "Index" }}
+  {{ template "Header" }}
+    {{ template "Menu"  }}
+    <h2>Search Hermaeus' Codex</h2>
+       <form method="GET" action="search">
+         <input type="text" name="id" value="{{ .QueryId }}"/> <input type="submit" value="Search" />
+         <br />
+         <p> {{ .BannerMessage }} </p>
+       </form>
+    {{ if .QueryId }}
+        <p>No results found for {{ .QueryId }} :(</p>
+    {{ end }}
+  {{ template "Footer" }}
+{{ end }}
